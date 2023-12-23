@@ -19,6 +19,7 @@ This is a simple web-based tool that allows users to convert hexadecimal strings
 
 - **XFL Decimal**: Converts a hexadecimal string to its decimal representation in the XFL format.
 - **UInt8**: Converts a 2-character hex string to an 8-bit unsigned integer.
+- **UInt16**: Converts an 4-character hex string to a 16-bit unsigned integer.
 - **UInt32**: Converts an 8-character hex string to a 32-bit unsigned integer.
 - **UInt64**: Converts a 16-character hex string to a 64-bit unsigned integer.
 - **UInt224**: Converts a 56-character hex string to a 224-bit unsigned integer.
