@@ -24,7 +24,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://<username>.github.io/<repository-name>",
+  "homepage": "https://github.com/Transia-RnD/xrpl-hex-visualizer",
   "dependencies": {
     "react": "^18.2.0",
     "react-app-rewired": "^2.2.1",
