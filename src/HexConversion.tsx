@@ -23,6 +23,8 @@ const HexConversion: React.FC = () => {
   function convertHex(): void {
     const hex = hexInput
     let results: Record<string, any> = {};
+    console.log(hex.slice(0, 2));
+    
     try {
       // Check if the input is a valid XFL or XLF hex
       if (hex.length === 16) {
@@ -43,11 +45,17 @@ const HexConversion: React.FC = () => {
           results.xflHex = xflHex;
           results.xflDecimal = xflDecimal;
         }
-      } else if (hex.length === 40) {
+      } else if (hex.length === 40 && hex.slice(0, 2) !== '00') {
         // @ts-ignore
         const xrpAddress = hexToXRPAddress(hex);
         if (xrpAddress) {
           results.xrpAddress = xrpAddress;
+        }
+      } else if (hex.length === 40) {
+        // @ts-ignore
+        const xrpCurrency = hexToCurrency(hex);
+        if (xrpCurrency) {
+          results.xrpCurrency = xrpCurrency;
         }
       }
     } catch (error) {
@@ -63,10 +71,6 @@ const HexConversion: React.FC = () => {
       results.hash256 = hex.length === 64 ? hex : "Invalid size";
       results.publicKey = hex.length === 66 ? hex : "Invalid size";
       results.string = convertHexToString(hex);
-      results.currency =
-        hex.length === 40 ? hexToCurrency(hex) : "Invalid size";
-      results.xrpAddress =
-        hex.length === 40 ? hexToXRPAddress(hex) : "Invalid size";
     }
     console.log(results);
     
