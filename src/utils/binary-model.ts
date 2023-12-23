@@ -1,5 +1,5 @@
 /* eslint-disable no-throw-literal */
-import { convertHexToString, encodeAccountID } from "xrpl";
+import { convertHexToString, convertStringToHex, decodeAccountID, encodeAccountID } from "xrpl";
 
 const minMantissa = 1000000000000000n;
 const maxMantissa = 9999999999999999n;
@@ -164,4 +164,60 @@ export function hexToCurrency(hex: string): any {
 export function hexToXRPAddress(hex: string): any {
   const value = encodeAccountID(Buffer.from(hex, "hex"));
   return value.slice(0, 40);
+}
+
+
+export function uint8ToHex(value: any): string {
+  if (value < 0 || value > 255) {
+    throw Error(`Integer ${value} is out of range for uint8 (0-255)`)
+  }
+  return value.toString(16).padStart(2, '0').toUpperCase()
+}
+
+export function uint16ToHex(value: any): string {
+  if (value < 0 || value > 2 ** 16 - 1) {
+    throw Error(`Integer ${value} is out of range for uint32 (0-4294967295)`)
+  }
+  return value.toString(16).padStart(4, '0').toUpperCase()
+}
+
+export function uint32ToHex(value: any): string {
+  if (value < 0 || value > 2 ** 32 - 1) {
+    throw Error(`Integer ${value} is out of range for uint32 (0-4294967295)`)
+  }
+  return value.toString(16).padStart(8, '0').toUpperCase()
+}
+
+export function uint64ToHex(value: any): string {
+  if (value < 0 || value > BigInt(18446744073709551615n)) {
+    throw Error(
+      `Integer ${value} is out of range for uint64 (0-18446744073709551615)`
+    )
+  }
+  return value.toString(16).padStart(16, '0').toUpperCase()
+}
+
+export function uint224ToHex(value: any): string {
+  if (
+    value < 0 ||
+    value >
+      BigInt(
+        26959946667150639794667015087019630673637144422540572481103610249215n
+      )
+  ) {
+    throw Error(
+      `Integer ${value} is out of range for uint224 (0-26959946667150639794667015087019630673637144422540572481103610249215)`
+    )
+  }
+  return value.toString(16).padStart(56, '0').toUpperCase()
+}
+
+export function currencyToHex(value: any): string {
+  const content = convertStringToHex(value)
+  return content.padEnd(16, '0').padStart(40, '0') // 40
+}
+
+export function xrpAddressToHex(value: any): string {
+  const content = decodeAccountID(value)
+  return Buffer.from(content).toString('hex').toUpperCase() // 40
 }

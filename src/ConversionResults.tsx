@@ -19,7 +19,11 @@ const ConversionResults: React.FC<ConversionResultsProps> = ({ results }) => {
       return null;
     }
     if (value !== 'Invalid size' && value !== '') {
-      return <p key={type}>{`${type}: ${value}`}</p>;
+      if (type === 'xflDecimal') {
+        return <p key={type}>{`${type} (uint64): ${value}`}</p>;
+      } else {
+        return <p key={type}>{`${type}: ${value}`}</p>;
+      }
     }
     return null; // or you could return a placeholder if you want to show something for invalid sizes
   }).filter((m: any) => m !== null);
