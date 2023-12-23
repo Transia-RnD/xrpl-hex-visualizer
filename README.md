@@ -2,6 +2,10 @@
 
 This is a simple web-based tool that allows users to convert hexadecimal strings into various data types. The tool is designed to handle specific formats such as XFL (eXtended Financial Ledger) and other common data types like unsigned integers and strings.
 
+## Public Page
+
+https://transia-rnd.github.io/xrpl-hex-visualizer/
+
 ## Features
 
 - Convert hexadecimal strings to different formats.
