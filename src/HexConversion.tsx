@@ -91,27 +91,27 @@ const HexConversion: React.FC = () => {
 
     // results.decimal = parseInt(hex, 16);
     try {
-      results.uint8 = uint8ToHex(value);
+      results.uint8 = uint8ToHex(Number(value));
     } catch (error: any) {
       console.log(error.message);
     }
     try {
-      results.uint16 = uint16ToHex(value);
+      results.uint16 = uint16ToHex(Number(value));
     } catch (error: any) {
       console.log(error.message);
     }
     try {
-      results.uint32 = uint32ToHex(value);
+      results.uint32 = uint32ToHex(Number(value));
     } catch (error: any) {
       console.log(error.message);
     }
     try {
-      results.uint64 = uint64ToHex(value);
+      results.uint64 = uint64ToHex(Number(value));
     } catch (error: any) {
       console.log(error.message);
     }
     try {
-      results.uint224 = uint224ToHex(value);
+      results.uint224 = uint224ToHex(Number(value));
     } catch (error: any) {
       console.log(error.message);
     }
