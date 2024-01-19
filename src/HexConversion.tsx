@@ -19,6 +19,7 @@ import {
   xrpAddressToHex,
   currencyToHex,
   floatToLEXfl,
+  hexNamespace,
 } from "./utils/binary-model";
 import ConversionResults, { ConversionResultsProps } from "./ConversionResults";
 
@@ -31,7 +32,6 @@ const HexConversion: React.FC = () => {
   function convertFromHex(): void {
     const hex = hexInput
     let results: Record<string, any> = {};
-    console.log(hex.slice(0, 2));
     
     try {
       // Check if the input is a valid XFL or XLF hex
@@ -81,7 +81,6 @@ const HexConversion: React.FC = () => {
       results.publicKey = hex.length === 66 ? hex : "Invalid size";
       results.string = convertHexToString(hex);
     }
-    console.log(results);
     
     setConversionResults(results as ConversionResultsProps);
   }
@@ -122,6 +121,11 @@ const HexConversion: React.FC = () => {
       console.log(error.message);
     }
     try {
+      results.namespace = hexNamespace(Buffer.from(value));
+    } catch (error: any) {
+      console.log(error.message);
+    }
+    try {
       results.xrpAddress = xrpAddressToHex(value);
     } catch (error: any) {
       console.log(error.message);
@@ -140,7 +144,6 @@ const HexConversion: React.FC = () => {
     } catch (error: any) {
       console.log(error.message);
     }
-    console.log(results);
     
     setConversionResults(results as ConversionResultsProps);
   }

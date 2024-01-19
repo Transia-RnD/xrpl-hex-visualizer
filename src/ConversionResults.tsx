@@ -6,18 +6,8 @@ export type ConversionResultsProps = {
 };
 
 const ConversionResults: React.FC<ConversionResultsProps> = ({ results }) => {
-  console.log(results);
-
-  // Check if there are any valid results other than string
-  const hasOtherValidResults = Object.entries(results).some(
-    ([type, value]) => type !== 'string' && value !== 'Invalid size' && value !== ''
-  );
-
   const resultMap = Object.entries(results).map(([type, value]) => {
     // Exclude string if there are other valid results
-    if (type === 'string' && hasOtherValidResults) {
-      return null;
-    }
     if (value !== 'Invalid size' && value !== '') {
       if (type === 'xflDecimal') {
         return <p key={type}>{`${type} (uint64): ${value}`}</p>;
