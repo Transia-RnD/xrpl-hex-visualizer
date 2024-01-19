@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/xrpl-hex-visualizer/static/css/main.d504ff0a.css",
-    "main.js": "/xrpl-hex-visualizer/static/js/main.3bfa4cf6.js",
+    "main.js": "/xrpl-hex-visualizer/static/js/main.b3944c3e.js",
     "static/js/496.f932e76f.chunk.js": "/xrpl-hex-visualizer/static/js/496.f932e76f.chunk.js",
     "index.html": "/xrpl-hex-visualizer/index.html",
     "main.d504ff0a.css.map": "/xrpl-hex-visualizer/static/css/main.d504ff0a.css.map",
-    "main.3bfa4cf6.js.map": "/xrpl-hex-visualizer/static/js/main.3bfa4cf6.js.map",
+    "main.b3944c3e.js.map": "/xrpl-hex-visualizer/static/js/main.b3944c3e.js.map",
     "496.f932e76f.chunk.js.map": "/xrpl-hex-visualizer/static/js/496.f932e76f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d504ff0a.css",
-    "static/js/main.3bfa4cf6.js"
+    "static/js/main.b3944c3e.js"
   ]
 }
