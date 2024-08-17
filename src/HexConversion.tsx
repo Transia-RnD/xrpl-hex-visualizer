@@ -121,7 +121,11 @@ const HexConversion: React.FC = () => {
       console.log(error.message);
     }
     try {
-      results.namespace = hexNamespace(Buffer.from(value));
+      if (typeof value === 'string') {
+        results.namespace = hexNamespace(value);;
+      } else {
+        results.namespace = hexNamespace(Buffer.from(value));
+      }
     } catch (error: any) {
       console.log(error.message);
     }
