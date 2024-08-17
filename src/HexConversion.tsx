@@ -20,6 +20,7 @@ import {
   currencyToHex,
   floatToLEXfl,
   hexNamespace,
+  genHash,
 } from "./utils/binary-model";
 import ConversionResults, { ConversionResultsProps } from "./ConversionResults";
 
@@ -121,11 +122,12 @@ const HexConversion: React.FC = () => {
       console.log(error.message);
     }
     try {
-      if (typeof value === 'string') {
-        results.namespace = hexNamespace(value);;
-      } else {
-        results.namespace = hexNamespace(Buffer.from(value));
-      }
+      results.namespace = hexNamespace(value as string);
+    } catch (error: any) {
+      console.log(error.message);
+    }
+    try {
+      results.hash = genHash(Buffer.from(value));
     } catch (error: any) {
       console.log(error.message);
     }

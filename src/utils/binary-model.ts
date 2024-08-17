@@ -1,6 +1,7 @@
 /* eslint-disable no-throw-literal */
 import { convertHexToString, convertStringToHex, decodeAccountID, encodeAccountID } from "xrpl";
 import sha512Half from 'xrpl/dist/npm/utils/hashes/sha512Half'
+import { SHA256 } from 'crypto-js'
 // import { createHash } from 'crypto'
 
 const minMantissa = 1000000000000000n;
@@ -224,6 +225,10 @@ export function xrpAddressToHex(value: any): string {
   return Buffer.from(content).toString('hex').toUpperCase() // 40
 }
 
-export function hexNamespace(dataBytes: Buffer) {
+export function genHash(dataBytes: Buffer) {
   return sha512Half(dataBytes.toString('hex'))
+}
+
+export function hexNamespace(hookNamespaceSeed: string): string {
+  return SHA256(hookNamespaceSeed).toString().toUpperCase()
 }
