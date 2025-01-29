@@ -41,7 +41,7 @@ const ConversionResults: React.FC<ConversionResultsProps> = ({ results }) => {
       } else {
         if (isInt.includes(type)) {
           return <p key={type}>
-            {`${type}: LE=${value} BE=${flipHex(value)}`}
+            {`${type}: BE=${value} LE=${flipHex(value)}`}
           </p>;
         }
         return <p key={type}>
