@@ -1,9 +1,17 @@
 import React from 'react';
+import { flipHex } from './utils/binary-model';
 
 // Define the shape of the results prop
 export type ConversionResultsProps = {
   results: Record<string, any>;
 };
+
+const isInt = [
+  'uint8',
+  'uint16',
+  'uint32',
+  'uint64'
+]
 
 const carrayList = [
   'namespace',
@@ -31,6 +39,11 @@ const ConversionResults: React.FC<ConversionResultsProps> = ({ results }) => {
       if (type === 'xflDecimal') {
         return <p key={type}>{`${type} (uint64): ${value}`}</p>;
       } else {
+        if (isInt.includes(type)) {
+          return <p key={type}>
+            {`${type}: LE=${value} BE=${flipHex(value)}`}
+          </p>;
+        }
         return <p key={type}>
           {`${type}: ${value}`}
           {carrayList.includes(type) && (
