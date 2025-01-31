@@ -72,6 +72,7 @@ const HexConversion: React.FC = () => {
     }
     if (Object.keys(results).length === 0) {
       // If not XFL or XLF, perform other conversions
+      results.hex = hex;
       results.decimal = parseInt(hex, 16);
       results.uint8 = hex.length === 2 ? hexToUInt8(hex) : "Invalid size";
       results.uint16 = hex.length === 4 ? hexToUInt16(hex) : "Invalid size";

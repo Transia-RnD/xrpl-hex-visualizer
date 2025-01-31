@@ -36,12 +36,18 @@ const ConversionResults: React.FC<ConversionResultsProps> = ({ results }) => {
       return null
     }
     if (value !== 'Invalid size' && value !== '') {
-      if (type === 'xflDecimal') {
+      if (type === 'hex') {
+        return null
+      }
+      else if (type === 'decimal') {
+        return <p key={type}>{`${type}: BE=${value} LE=${parseInt(flipHex(results.hex), 16)}`}</p>;
+      }
+      else if (type === 'xflDecimal') {
         return <p key={type}>{`${type} (uint64): ${value}`}</p>;
       } else {
         if (isInt.includes(type)) {
           return <p key={type}>
-            {`${type}: BE=${value} LE=${flipHex(value)}`}
+            {`${type}: BE=${value} LE=${!flipHex(value) ? results.hex : flipHex(value)}`}
           </p>;
         }
         return <p key={type}>
