@@ -46,6 +46,7 @@ const HexConversion: React.FC = () => {
           results.xflDecimal = xflDecimal;
           results.xflInt = xflInt;
         }
+        results.string = convertHexToString(hex);
       } else if (hex.length === 19) {
         // @ts-ignore
         const xflHex = flipBeLe(BigInt(hex));
@@ -54,18 +55,21 @@ const HexConversion: React.FC = () => {
           results.xflHex = xflHex;
           results.xflDecimal = xflDecimal;
         }
+        results.string = convertHexToString(hex);
       } else if (hex.length === 40 && hex.slice(0, 2) !== '00') {
         // @ts-ignore
         const xrpAddress = hexToXRPAddress(hex);
         if (xrpAddress) {
           results.xrpAddress = xrpAddress;
         }
+        results.string = convertHexToString(hex);
       } else if (hex.length === 40) {
         // @ts-ignore
         const xrpCurrency = hexToCurrency(hex);
         if (xrpCurrency) {
           results.xrpCurrency = xrpCurrency;
         }
+        results.string = convertHexToString(hex);
       }
     } catch (error) {
       console.log(error);

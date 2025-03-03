@@ -217,6 +217,9 @@ export function uint224ToHex(value: any): string {
 
 export function currencyToHex(value: any): string {
   const content = convertStringToHex(value)
+  if (value.length > 3) {
+    return content.padEnd(40, '0').padStart(16, '0') // 40
+  }
   return content.padEnd(16, '0').padStart(40, '0') // 40
 }
 
