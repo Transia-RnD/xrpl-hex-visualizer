@@ -235,3 +235,58 @@ export function genHash(dataBytes: Buffer) {
 export function hexNamespace(hookNamespaceSeed: string): string {
   return SHA256(hookNamespaceSeed).toString().toUpperCase()
 }
+
+export function stnumberToHex(value: number | bigint): string {
+  const drops = BigInt(value)
+  const isPositive = drops >= 0n
+  const absDrops = isPositive ? drops : -drops
+  
+  // Create the first byte with XRP flags
+  let firstByte = 0x00 // Type bit = 0 (XRP/MPT), Is MPT bit = 0 (XRP)
+  if (isPositive) {
+    firstByte |= 0x40 // Set sign bit
+  }
+  
+  // Mask to keep only 57 bits for the amount
+  const MASK_57_BIT = 0x01FFFFFFFFFFFFFFn
+  const maskedDrops = absDrops & MASK_57_BIT
+  
+  // Combine first byte with the amount
+  const combinedValue = (BigInt(firstByte) << 56n) | maskedDrops
+  
+  return uint64ToHex(combinedValue)
+}
+
+export function hexToXRPNumber(hex: string): bigint {
+  if (hex.length !== 16) {
+    throw new Error('TokenAmount hex must be exactly 8 bytes (16 hex characters)')
+  }
+  
+  const fullValue = hexToUInt64(hex)
+  console.log(fullValue);
+  
+  const isPositive = (Number(fullValue >> 62n) & 1) === 1
+  
+  // Mask to extract 57 bits for the amount
+  const MASK_57_BIT = 0x01FFFFFFFFFFFFFFn
+  const numDropsAbs = fullValue & MASK_57_BIT
+  
+  return isPositive ? numDropsAbs : -numDropsAbs
+}
+
+export function hexToIOUNumber(hex: string): { exponent: number, mantissa: bigint } {
+  if (hex.length !== 16) {
+    throw new Error('TokenAmount hex must be exactly 8 bytes (16 hex characters)')
+  }
+  
+  const fullValue = hexToUInt64(hex)
+  
+  // Extract exponent (bits 61-54) and adjust by -97
+  const rawExponent = Number((fullValue >> 54n) & 0xFFn)
+  const exponent = rawExponent - 97
+  
+  // Extract mantissa (bits 53-0)
+  const mantissa = fullValue & 0x3FFFFFFFFFFFFFn
+  
+  return { exponent, mantissa }
+}

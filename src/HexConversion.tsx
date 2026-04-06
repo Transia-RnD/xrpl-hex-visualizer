@@ -21,6 +21,8 @@ import {
   floatToLEXfl,
   hexNamespace,
   genHash,
+  hexToXRPNumber,
+  hexToIOUNumber,
 } from "./utils/binary-model";
 import ConversionResults, { ConversionResultsProps } from "./ConversionResults";
 
@@ -47,6 +49,12 @@ const HexConversion: React.FC = () => {
           results.xflInt = xflInt;
         }
         results.string = convertHexToString(hex);
+        const xrpnumberInt = hexToXRPNumber(hex);
+        const { exponent, mantissa } = hexToIOUNumber(hex);
+        results.xrpNumber = xrpnumberInt;
+        results.iouExponent = exponent;
+        results.iouMantissa = mantissa;
+        results.iouNumber = Number(mantissa) * Math.pow(10, exponent);
       } else if (hex.length === 19) {
         // @ts-ignore
         const xflHex = flipBeLe(BigInt(hex));
